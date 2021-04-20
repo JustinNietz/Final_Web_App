@@ -64,7 +64,7 @@ def form_insert_post():
     inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),
                  request.form.get('Rooms'), request.form.get('Beds'),
                  request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'), request.form.get('Taxes'))
-    sql_insert_query = """INSERT INTO tblhomesImport (Sell, List, Living, Rooms, Beds, Baths, Age, Acres, Taxes) VALUES (%s, %s,%s, %s,%s, %s,%s) """
+    sql_insert_query = """INSERT INTO tblhomesImport (Sell, List, Living, Rooms, Beds, Baths, Age, Acres, Taxes) VALUES (%s, %s,%s, %s,%s, %s,%s, %s, %s) """
     cursor.execute(sql_insert_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
