@@ -13,6 +13,7 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'homesData'
+app.config{'MYSQL_DATABASE_DB2'} = 'loginData'
 mysql.init_app(app)
 
 
@@ -142,7 +143,7 @@ def api_delete(home_id) -> str:
 
 
 @app.route('/')
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
