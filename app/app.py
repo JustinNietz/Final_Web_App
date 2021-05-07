@@ -1,6 +1,6 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect
+from flask import Flask, request, Response, redirect, url_for
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
@@ -46,12 +46,14 @@ def form_update_post(home_id):
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),
                  request.form.get('Rooms'), request.form.get('Beds'),
-                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'), request.form.get('Taxes'), home_id)
+                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'),
+                 request.form.get('Taxes'), home_id)
     sql_update_query = """UPDATE tblhomesImport t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
     %s, t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
+
 
 @app.route('/homes/new', methods=['GET'])
 def form_insert_get():
@@ -63,11 +65,13 @@ def form_insert_post():
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),
                  request.form.get('Rooms'), request.form.get('Beds'),
-                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'), request.form.get('Taxes'))
+                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'),
+                 request.form.get('Taxes'))
     sql_insert_query = """INSERT INTO tblhomesImport (Sell, List, Living, Rooms, Beds, Baths, Age, Acres, Taxes) VALUES (%s, %s,%s, %s,%s, %s,%s, %s, %s) """
     cursor.execute(sql_insert_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
+
 
 @app.route('/delete/<int:home_id>', methods=['POST'])
 def form_delete_post(home_id):
@@ -97,19 +101,21 @@ def api_retrieve(home_id) -> str:
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
+
 @app.route('/api/v1/homes/<int:home_id>', methods=['PUT'])
 def api_edit(home_id) -> str:
     cursor = mysql.get_db().cursor()
     content = request.json
     inputData = (content['Sell'], content['List'], content['Living'],
                  content['Rooms'], content['Beds'],
-                 content['Baths'], content['Age'], content['Acres'], content['Taxes'],home_id)
+                 content['Baths'], content['Age'], content['Acres'], content['Taxes'], home_id)
     sql_update_query = """UPDATE tblhomesImport t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
     %s, t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
     return resp
+
 
 @app.route('/api/v1/homes', methods=['POST'])
 def api_add() -> str:
@@ -125,7 +131,6 @@ def api_add() -> str:
     return resp
 
 
-
 @app.route('/api/v1/homes/<int:home_id>', methods=['DELETE'])
 def api_delete(home_id) -> str:
     cursor = mysql.get_db().cursor()
@@ -134,6 +139,62 @@ def api_delete(home_id) -> str:
     mysql.get_db().commit()
     resp = Response(status=210, mimetype='application/json')
     return resp
+
+
+@app.route('/')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
+        account = cursor.fetchone()
+        if account:
+            session['loggedin'] = True
+            session['id'] = account['id']
+            session['username'] = account['username']
+            msg = 'Logged in successfully !'
+            return render_template('index.html', msg=msg)
+        else:
+            msg = 'Incorrect username / password !'
+    return render_template('login.html', msg=msg)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('username', None)
+    return redirect(url_for('login'))
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM accounts WHERE username = % s', (username,))
+        account = cursor.fetchone()
+        if account:
+            msg = 'Account already exists !'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address !'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers !'
+        elif not username or not password or not email:
+            msg = 'Please fill out the form !'
+        else:
+            cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s)', (username, password, email,))
+            mysql.connection.commit()
+            msg = 'You have successfully registered !'
+    elif request.method == 'POST':
+        msg = 'Please fill out the form !'
+    return render_template('register.html', msg=msg)
 
 
 if __name__ == '__main__':
