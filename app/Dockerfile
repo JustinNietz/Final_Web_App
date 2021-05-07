@@ -12,3 +12,4 @@ RUN pip install flask-mysqldb
 COPY . /app
 
 CMD python app.py
+CMD python login.py
