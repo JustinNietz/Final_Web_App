@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY requirements.txt /app
 RUN pip install -r requirements.txt --upgrade pip
+RUN pip install Flask
+RUN pip install flask-mysqldb
 
 COPY . /app
 
