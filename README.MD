@@ -2,6 +2,61 @@
 
 This project is a homework assignment to teach how to get Pycharm setup with Docker, Flask, MySQL
 
+# Installation Instructions for Using the App with Docker
+
+## 1. Installing Docker
+
+**A, Instructions for Windows Users**
+
+There are needed requirements to install Docker Desktop:
+
+* Windows 10, version 1903 or higher
+* WSL 2 feature is enabled
+* Prerequisites for running WSL 2 on Windows 10
+* 64 bit processor
+* 4GB system RAM
+* BIOS-level hardware virtualization support must be enabled in the BIOS settings
+* Linux kernel update package is installed
+
+If all requirements are met, we can download Docker Desktop Installer.exe from Docker Hub. After that, we need to just
+double-click on the file to run the installer. It is highly important that we ensure the Enable WSL 2 Features option is
+selected on the Configuration page. By following the instructions given by the installation wizard, we can proceed with
+the installation. Docker Desktop does not run automatically after we installed it. To start the program, we need to
+search for it on our computer. 
+
+![finding Docker](screenshots/Docker_in_Search.png)
+
+Docker is running when the whale icon appears on the taskbar; we can access it from any
+terminal now.
+
+![whale icon](screenshots/whale_Microsoft.png)
+
+**B, Instructions for Mac users**
+
+Needed requirements to install Docker Desktop:
+
+* macOS must be version 10.14 or newer (Mojave, Catalina, or Big Sur)
+* At least 4 GB of RAM.
+* VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop
+
+Installing Docker on macOS is just as easy as on Windows. We need to double-click on Docker.dmg, then drag the Docker
+icon to our Applications folder. 
+
+![Dragging Docker app](screenshots/Docker_app.png)
+
+After dragging it, we just need to double-click on Docker.app in the Applications
+folder to start the program the first time. 
+
+![Starting Docker](screenshots/Docker_run.png)
+
+When we notice the whale icon in the top status bar, it shows that Docker
+Desktop is up and running.
+
+![Running Docker](screenshots/whale_IOS.png)
+
+## 2. How to Setup the Final Web Application
+
+
 # Postman Screenshot
 
 ![postman request output](screenshots/postman.PNG)
