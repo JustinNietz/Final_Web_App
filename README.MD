@@ -54,7 +54,7 @@ Desktop is up and running.
 
 ![Running Docker](screenshots/whale_IOS.png)
 
-## 2. How to Setup the Final Web Application
+## 2. How to Run the Final Web Application
 
 
 # Postman Screenshot
