@@ -13,3 +13,4 @@ This project is a homework assignment to teach how to get Pycharm setup with Doc
 # Bootstrap HTML template
 
 ![bootstrap data](screenshots/bootstrap.PNG)
+
