@@ -41,8 +41,17 @@ def login_check():
 
     return render_template("login.html")
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def new_user():
+    if request.method == "POST":
+        if "one" in request.form and "two" in request.form and "three" in request.form:
+            username = request.form['one']
+            email = request.form['two']
+            password = request.form['three']
+            cursor = mysql.get_db().cursor()
+            cursor.execute('INSERT INTO tblloginImport(name, email, password)VALUES(%s,%s,%s)', (username, email, password))
+            mysql.get_db().commit()
+            return redirect(url_for('login_check'))
     return render_template("register.html")
 
 @app.route('/homepage', methods=['GET'])
