@@ -8,6 +8,7 @@ from pymysql.cursors import DictCursor
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
+app.secret_key = "123456"
 
 app.config['MYSQL_DATABASE_HOST'] = 'db'
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -33,9 +34,10 @@ def login_check():
             info = cursor.fetchone()
             if info is not None:
                 if info['email'] == username and info['password'] == password:
-                    return "login successful"
+                    session['loginsuccess'] = True
+                    return redirect(url_for("home_page"))
             else:
-                return "login unsuccessful, please register"
+                return redirect(url_for("login_check"))
 
     return render_template("login.html")
 
@@ -45,11 +47,12 @@ def new_user():
 
 @app.route('/homepage', methods=['GET'])
 def home_page():
-    user = {'username': 'Justin Nietzer'}
-    cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM tblhomesImport')
-    result = cursor.fetchall()
-    return render_template('dblist.html', title='Home', user=user, homes=result)
+    if session['loginsuccess'] == True:
+        user = {'username': 'Justin Nietzer'}
+        cursor = mysql.get_db().cursor()
+        cursor.execute('SELECT * FROM tblhomesImport')
+        result = cursor.fetchall()
+        return render_template('dblist.html', title='Home', user=user, homes=result)
 
 
 @app.route('/view/<int:home_id>', methods=['GET'])
