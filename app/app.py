@@ -1,14 +1,25 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect, url_for, session
+import os
+from flask import Flask, request, Response, redirect, url_for, session, flash
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+from flask_mail import Mail, Message
 
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
 app.secret_key = "123456"
+
+app.config['SECRET_KEY'] = 'top-secret!'
+app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'apikey'
+app.config['MAIL_PASSWORD'] = "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"
+app.config['MAIL_DEFAULT_SENDER'] = 'justinnietzer@gmail.com'
+mail = Mail(app)
 
 app.config['MYSQL_DATABASE_HOST'] = 'db'
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -18,6 +29,21 @@ app.config['MYSQL_DATABASE_DB'] = 'homesData'
 mysql.init_app(app)
 
 db = MySQL(app)
+
+@app.route('/send', methods=['GET', 'POST'])
+def send_grid():
+    if request.method == 'POST':
+        recipient = request.form['recipient']
+        msg = Message('Twilio SendGrid Test Email', recipients=[recipient])
+        msg.body = ('Congratulations! You have sent a test email with '
+                    'Twilio SendGrid!')
+        msg.html = ('<h1>Twilio SendGrid Test Email</h1>'
+                    '<p>Congratulations! You have sent a test email with '
+                    '<b>Twilio SendGrid</b>!</p>')
+        mail.send(msg)
+        flash(f'A test message was sent to {recipient}.')
+        return redirect(url_for('send_grid'))
+    return render_template('sendgrid.html')
 
 @app.route('/')
 def index():
