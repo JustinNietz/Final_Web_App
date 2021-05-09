@@ -15,6 +15,14 @@ CREATE TABLE IF NOT EXISTS tblhomesImport (
     PRIMARY KEY (`id`)
 );
 
+CREATE TABLE IF NOT EXISTS tblloginImport (
+    `id` int AUTO_INCREMENT,
+    `name` VARCHAR(45),
+    `email` VARCHAR(45),
+    `password` VARCHAR(45),
+    PRIMARY KEY (`id`)
+);
+
 INSERT INTO tblhomesImport (Sell, List, Living, Rooms, Beds, Baths, Age, Acres, Taxes) VALUES
     ('142', 160, 28, 10, 5, 3,  60, 0.28,  3167),
     ('175', 180, 18,  8, 4, 1,  12, 0.43,  4033),
@@ -65,5 +73,7 @@ INSERT INTO tblhomesImport (Sell, List, Living, Rooms, Beds, Baths, Age, Acres, 
     ('143', 145, 21,  7, 4, 2,  10, 1.20,  3529),
     ('247', 252, 29,  9, 4, 2,   4, 1.25,  4626),
     ('111', 120, 15,  8, 3, 1,  97, 1.11,  3205),
-    ('133', 145, 26,  7, 3, 1,  42, 0.36,  3059),
-    (' ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+    ('133', 145, 26,  7, 3, 1,  42, 0.36,  3059);
+
+INSERT INTO tblloginImport (name, email, password) VALUES
+    ('Justin', 'justinnietzer@gmail.com', 12345);

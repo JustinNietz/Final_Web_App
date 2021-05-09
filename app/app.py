@@ -1,6 +1,6 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect
+from flask import Flask, request, Response, redirect, url_for
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
@@ -15,14 +15,25 @@ app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'homesData'
 mysql.init_app(app)
 
-
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
+    return redirect(url_for('new_user'))
+
+@app.route('/register')
+def new_user():
+    return render_template("register.html")
+
+@app.route('/new')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/homepage', methods=['GET'])
+def home_page():
     user = {'username': 'Justin Nietzer'}
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM tblhomesImport')
     result = cursor.fetchall()
-    return render_template('index.html', title='Home', user=user, homes=result)
+    return render_template('dblist.html', title='Home', user=user, homes=result)
 
 
 @app.route('/view/<int:home_id>', methods=['GET'])
