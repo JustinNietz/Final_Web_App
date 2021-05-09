@@ -63,6 +63,10 @@ def home_page():
         result = cursor.fetchall()
         return render_template('dblist.html', title='Home', user=user, homes=result)
 
+@app.route('/logout')
+def logout():
+    session.pop('loginsuccess',None)
+    return redirect(url_for('index'))
 
 @app.route('/view/<int:home_id>', methods=['GET'])
 def record_view(home_id):
