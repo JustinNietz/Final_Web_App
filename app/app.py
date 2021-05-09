@@ -1,9 +1,10 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect, url_for
+from flask import Flask, request, Response, redirect, url_for, session
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
@@ -15,17 +16,32 @@ app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'homesData'
 mysql.init_app(app)
 
+db = MySQL(app)
+
 @app.route('/')
 def index():
-    return redirect(url_for('new_user'))
+    return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_check():
+    if request.method == 'POST':
+        if 'username' in request.form and 'password' in request.form:
+            username = request.form['username']
+            password = request.form['password']
+            cursor = mysql.get_db().cursor()
+            cursor.execute("SELECT * FROM tblloginImport WHERE email=%s AND password=%s", (username, password))
+            info = cursor.fetchone()
+            if info is not None:
+                if info['email'] == username and info['password'] == password:
+                    return "login successful"
+            else:
+                return "login unsuccessful, please register"
+
+    return render_template("login.html")
 
 @app.route('/register')
 def new_user():
     return render_template("register.html")
-
-@app.route('/new')
-def profile():
-    return render_template('profile.html')
 
 @app.route('/homepage', methods=['GET'])
 def home_page():
