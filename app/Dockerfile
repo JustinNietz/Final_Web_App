@@ -11,4 +11,3 @@ RUN pip install flask flask-mail python-dotenv -r requirements.txt
 COPY . /app
 
 CMD python app.py
-CMD python login.py
