@@ -26,6 +26,7 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'homesData'
+
 mysql.init_app(app)
 
 db = MySQL(app)
@@ -121,12 +122,14 @@ def form_update_post(home_id):
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),
                  request.form.get('Rooms'), request.form.get('Beds'),
-                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'), request.form.get('Taxes'), home_id)
+                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'),
+                 request.form.get('Taxes'), home_id)
     sql_update_query = """UPDATE tblhomesImport t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
     %s, t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
+
 
 @app.route('/homes/new', methods=['GET'])
 def form_insert_get():
@@ -138,11 +141,13 @@ def form_insert_post():
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),
                  request.form.get('Rooms'), request.form.get('Beds'),
-                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'), request.form.get('Taxes'))
+                 request.form.get('Baths'), request.form.get('Age'), request.form.get('Acres'),
+                 request.form.get('Taxes'))
     sql_insert_query = """INSERT INTO tblhomesImport (Sell, List, Living, Rooms, Beds, Baths, Age, Acres, Taxes) VALUES (%s, %s,%s, %s,%s, %s,%s, %s, %s) """
     cursor.execute(sql_insert_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
+
 
 @app.route('/delete/<int:home_id>', methods=['POST'])
 def form_delete_post(home_id):
@@ -172,19 +177,21 @@ def api_retrieve(home_id) -> str:
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
+
 @app.route('/api/v1/homes/<int:home_id>', methods=['PUT'])
 def api_edit(home_id) -> str:
     cursor = mysql.get_db().cursor()
     content = request.json
     inputData = (content['Sell'], content['List'], content['Living'],
                  content['Rooms'], content['Beds'],
-                 content['Baths'], content['Age'], content['Acres'], content['Taxes'],home_id)
+                 content['Baths'], content['Age'], content['Acres'], content['Taxes'], home_id)
     sql_update_query = """UPDATE tblhomesImport t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
     %s, t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
     return resp
+
 
 @app.route('/api/v1/homes', methods=['POST'])
 def api_add() -> str:
@@ -198,7 +205,6 @@ def api_add() -> str:
     mysql.get_db().commit()
     resp = Response(status=201, mimetype='application/json')
     return resp
-
 
 
 @app.route('/api/v1/homes/<int:home_id>', methods=['DELETE'])
