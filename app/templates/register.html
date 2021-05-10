@@ -26,6 +26,12 @@
         <label>PASSWORD:</label>
         <input type="password" name="three" id="username"><br><br>
         <input type="submit" value="CREATE USER"><br><br>
+        <h1>Twilio SendGrid Example</h1>
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
     </form>
 </div>
 
