@@ -49,6 +49,7 @@ def send_grid():
 def index():
     return render_template('index.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login_check():
     if request.method == 'POST':
