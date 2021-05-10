@@ -11,11 +11,10 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/hello.css') }}">
-    <link rel="stylesheet" href="../static/styles/hello.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/layout.css') }}">
     <title>Welcome | Final Web App</title>
 </head>
-<body>
+
 <body class="text-center">
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
@@ -25,13 +24,13 @@
                                                         height="50"></a></h3>
             <nav class="nav nav-masthead justify-content-center">
                 <form action="/">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="/">Home</a>
                 </form>
                 <form action="/">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </form>
                 <form action="/">
-                    <a class="nav-link" href="#">Team</a>
+                    <a class="nav-link" href="/team">Team</a>
                 </form>
             </nav>
         </div>

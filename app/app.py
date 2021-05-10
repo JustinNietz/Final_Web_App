@@ -32,23 +32,19 @@ db = MySQL(app)
 
 @app.route('/send', methods=['GET', 'POST'])
 def send_grid():
-    if request.method == 'POST':
-        recipient = request.form['recipient']
-        msg = Message('Twilio SendGrid Test Email', recipients=[recipient])
-        msg.body = ('Congratulations! You have sent a test email with '
-                    'Twilio SendGrid!')
-        msg.html = ('<h1>Twilio SendGrid Test Email</h1>'
-                    '<p>Congratulations! You have sent a test email with '
-                    '<b>Twilio SendGrid</b>!</p>')
-        mail.send(msg)
-        flash(f'A test message was sent to {recipient}.')
-        return redirect(url_for('send_grid'))
     return render_template('sendgrid.html')
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
+
+@app.route('/team')
+def team_page():
+    return render_template('team.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_check():
@@ -72,14 +68,14 @@ def login_check():
 def new_user():
     if request.method == "POST":
         recipient = request.form['two']
-        msg = Message('Twilio SendGrid Test Email', recipients=[recipient])
-        msg.body = ('Congratulations! You have sent a test email with '
-                    'Twilio SendGrid!')
-        msg.html = ('<h1>Twilio SendGrid Test Email</h1>'
-                    '<p>Congratulations! You have sent a test email with '
-                    '<b>Twilio SendGrid</b>!</p>')
+        msg = Message('Thanks for signing up to Homes!', recipients=[recipient])
+        msg.body = ('To login, please click here: '
+                    'localhost:5000')
+        msg.html = ('<h1>Thanks for signing up to Homes!</h1>'
+                    '<p>To login, please click here: '
+                    '<a clicktracking="off" href="http://localhost:5000/login">http://localhost:5000/login</a></p>')
         mail.send(msg)
-        flash(f'A test message was sent to {recipient}.')
+        flash(f'An email was sent to {recipient}. Please verify your email to login.')
         if "one" in request.form and "two" in request.form and "three" in request.form:
             username = request.form['one']
             email = request.form['two']
@@ -87,13 +83,13 @@ def new_user():
             cursor = mysql.get_db().cursor()
             cursor.execute('INSERT INTO tblloginImport(name, email, password)VALUES(%s,%s,%s)', (username, email, password))
             mysql.get_db().commit()
-            return redirect(url_for('new_user'))
+            return redirect(url_for('send_grid'))
     return render_template("register.html")
 
 @app.route('/homepage', methods=['GET'])
 def home_page():
     if session['loginsuccess'] == True:
-        user = {'username': 'Justin Nietzer'}
+        user = {'username': 'Your'}
         cursor = mysql.get_db().cursor()
         cursor.execute('SELECT * FROM tblhomesImport')
         result = cursor.fetchall()
