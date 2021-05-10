@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/layout.css') }}">
     <title>Welcome | Final Web App</title>
 </head>
-
+<body>
 <body class="text-center">
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
@@ -25,34 +24,25 @@
                                                         height="50"></a></h3>
             <nav class="nav nav-masthead justify-content-center">
                 <form action="/">
-                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link active" href="#">Home</a>
                 </form>
                 <form action="/">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link" href="#">About</a>
                 </form>
                 <form action="/">
-                    <a class="nav-link" href="/team">Team</a>
+                    <a class="nav-link" href="#">Team</a>
                 </form>
             </nav>
         </div>
     </header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">Welcome to Homes Data!</h1>
-        <p class="lead">This site was built for NJIT's class IS-601 as a Final Project. Sign in below!</p>
-        <form action="/login">
-            <p class="lead">
-                <button type="submit" class="btn btn-lg btn-secondary">Login</button>
-            </p>
-        </form>
-        <h2>New? Register for an account!</h2>
-        <form action="/register">
-            <br>
-            <p class="lead">
-                <button type="submit" class="btn btn-lg btn-secondary">Sign-Up</button>
-            </p>
-        </form>
-
+        <h1 class="cover-heading">Thank you for registering!</h1>
+          {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endwith %}
     </main>
 
     <footer class="mastfoot mt-auto">
@@ -61,7 +51,6 @@
         </div>
     </footer>
 </div>
-
 </body>
 
 
@@ -79,33 +68,3 @@
         crossorigin="anonymous"></script>
 </body>
 <html>
-=======
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title> Login </title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	</head>
-	<body></br></br></br></br></br>
-    <div align="center">
-                <h1> Hi! </h1>
-                <h1>Welcome to My Site!</h1></div>
-		<div align="center">
-		<div align="center" class="border">
-			<div class="header">
-				<h1 class="word">Login</h1>
-			</div></br></br></br>
-			<h2 class="word">
-				<form action="{{ url_for('index') }}" method="post">
-				<div class="msg">{{ msg }}</div>
-					<input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
-					<input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br></br>
-					<input type="submit" class="btn" value="Sign In"></br></br>
-				</form>
-			</h2>
-			<p class="bottom">Don't you have an account? <a class="bottom" href="{{url_for('register')}}">  Sign up here</a></p>
-		</div>
-		</div>
-	</body>
-</html>
->>>>>>> 3f8831f214a10d815e226c318980c49c75521eb0
