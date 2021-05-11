@@ -103,13 +103,6 @@ def logout():
 
 @app.route('/view/<int:home_id>', methods=['GET'])
 def record_view(home_id):
-    cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM tblhomesImport WHERE id=%s', home_id)
-    result = cursor.fetchall()
-    return render_template('view.html', title='View Form', home=result[0])
-
-@app.route('/view/<int:home_id>', methods=['GET'])
-def record_view(home_id):
     legend = 'Home Sell and List Prices with Profits Data'
     labels = [
         'Sell Price', 'List Price', 'Profit'
