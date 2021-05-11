@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'>
-
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 <center>
     <h1>{{ title }}</h1>
     </center>
@@ -57,9 +55,7 @@
                     }
                 );
         </script>
-
-
-    <div class="card" class="m-5 p-2">
+        <div class="card" class="m-5 p-2">
             <h5 class="card-title">Home #-{{ home.id }}</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Sell Price = {{ home.Sell }}</li>
@@ -79,6 +75,4 @@
                 </form>
             </div>
         </div>
-
-    
 {% endblock %}
