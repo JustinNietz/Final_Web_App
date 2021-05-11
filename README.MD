@@ -1,6 +1,9 @@
 # Project Description
 
-This project is a homework assignment to teach how to get Pycharm setup with Docker, Flask, MySQL
+This website is designed for NJIT's course IS-601. We needed to research and develop one unique feature per team member
+and integrate it into our application (Pycharm, Docker, Flask, MySQL). Justin Nietzer worked on creating a login and registration process that includes
+email verification, and Nikolett Muller worked on using the statistics project to create API endpoints and then consume
+those endpoints using a JavaScript chart.
 
 # Installation Instructions for Using the App with Docker
 
@@ -73,3 +76,4 @@ select app as a service. Finally, we click on OK. Now, we are able to choose the
 
 We run the app again, then in order to see the website, we type "http://localhost:5000" into the address bar of our
 internet browser.
+

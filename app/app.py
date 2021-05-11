@@ -103,11 +103,22 @@ def logout():
 
 @app.route('/view/<int:home_id>', methods=['GET'])
 def record_view(home_id):
+    legend = 'Home Sell and List Prices with Profits Data'
+    labels = [
+        'Sell Price', 'List Price', 'Profit'
+    ]
+    values = []
     cursor = mysql.get_db().cursor()
+    cursor.execute('SELECT Sell FROM tblhomesImport WHERE id=%s', home_id)
+    for Sell in cursor.fetchall():
+        values.append(list(Sell.values())[0])
+    cursor.execute('SELECT List FROM tblhomesImport WHERE id=%s', home_id)
+    for List in cursor.fetchall():
+        values.append(list(List.values())[0])
+    values.append(int(list(List.values())[0]) - int(list(Sell.values())[0]))
     cursor.execute('SELECT * FROM tblhomesImport WHERE id=%s', home_id)
     result = cursor.fetchall()
-    return render_template('view.html', title='View Form', home=result[0])
-
+    return render_template('view.html', title='Home Sell and List Prices with Profits Data', max=300, home=result[0], labels=labels, legend=legend, values=values)
 
 @app.route('/edit/<int:home_id>', methods=['GET'])
 def form_edit_get(home_id):
