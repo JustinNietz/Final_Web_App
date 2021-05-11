@@ -73,16 +73,3 @@ select app as a service. Finally, we click on OK. Now, we are able to choose the
 
 We run the app again, then in order to see the website, we type "http://localhost:5000" into the address bar of our
 internet browser.
-
-# Postman Screenshot
-
-![postman request output](screenshots/postman.PNG)
-
-# SQL Data Screenshot
-
-![pycharm data query](screenshots/query.PNG)
-
-# Bootstrap HTML template
-
-![bootstrap data](screenshots/bootstrap.PNG)
-
