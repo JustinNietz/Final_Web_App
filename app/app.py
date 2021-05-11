@@ -107,7 +107,7 @@ def record_view(home_id):
     labels = [
         'Sell Price', 'List Price', 'Profit'
     ]
-    values = ()
+    values = []
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT Sell FROM tblhomesImport WHERE id=%s', home_id)
     for Sell in cursor.fetchall():
