@@ -5,12 +5,12 @@
 This website is designed for NJIT's course IS-601. We needed to research and develop one unique feature per team member
 and integrate it into our application (Pycharm, Docker, Flask, MySQL).
 
-## Team Members and feature
+## Team Members and Features
 
-* Justin Nietzer worked on creating a login and registration process that includes email verification
+* Justin Nietzer - Created a login and registration process with email verification - [Step-by-Step](screenshots/Final%20Web%20App%20-%20JNietzer.pdf)
 
-* Nikolett Muller worked on using the statistics project to create API endpoints and then consume those endpoints using
-  a JavaScript chart.
+* Nikolett Muller - Created a statistics project to create API endpoints and then consume those endpoints using
+  a JavaScript chart - [Step-by-Step](screenshots/Chart_Muller.pdf)
 
 ## Installation Instructions for Using the App with Docker
 
@@ -40,7 +40,7 @@ Docker is running when the whale icon appears on the taskbar.
 
 ![whale icon](screenshots/whale_Microsoft.png)
 
-#### For Mac users**
+#### For Mac users
 
 **Requirements**
 
@@ -78,6 +78,7 @@ select app as a service. Finally, we click on OK. Choose the newly added interpr
 
 ![adding interpreter](screenshots/add_interpreter.png)
 
+4. For the Sendgrid API, you must install the .env file attached to the submission.
+
 4. Run the app. In order to see the website, we type "http://localhost:5000" into the address bar of our
 internet browser.
-
