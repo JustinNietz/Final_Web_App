@@ -36,51 +36,48 @@ and integrate it into our application (Pycharm, Docker, Flask, MySQL).
 
 ![finding Docker](screenshots/Docker_in_Search.png)
 
-Docker is running when the whale icon appears on the taskbar; we can access it from any terminal now.
+Docker is running when the whale icon appears on the taskbar.
 
 ![whale icon](screenshots/whale_Microsoft.png)
 
-**B, Instructions for Mac users**
+#### For Mac users**
 
-Needed requirements to install Docker Desktop:
+**Requirements**
 
 * macOS must be version 10.14 or newer (Mojave, Catalina, or Big Sur)
 * At least 4 GB of RAM.
-* VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop
 
-Installing Docker on macOS is just as easy as on Windows. We need to double-click on Docker.dmg, then drag the Docker
-icon to our Applications folder.
+1. Double-click on Docker.dmg, then drag the Docker icon to our Applications folder.
 
 ![dragging Docker app](screenshots/Docker_app.png)
 
-After dragging it, we just need to double-click on Docker.app in the Applications folder to start the program the first
+2. Double-click on Docker.app in the Applications folder to start the program the first
 time.
 
 ![starting Docker](screenshots/Docker_run.png)
 
-When we notice the whale icon in the top status bar, it shows that Docker Desktop is up and running.
+Docker is running when the whale icon appears on the taskbar.
 
 ![running Docker](screenshots/whale_IOS.png)
 
-## 2. How to Run the Final Web Application
+### 2. How to Run the Final Web Application
 
-After Docker started running, we need to add a Configuration in Pycharm. We choose Docker, then Docker-compose. After
-choosing, we give the path to docker-compose.yml; we check both checkboxes under Options, then we click on Apply and OK.
-
+1. While Docker is running, add a Configuration in Pycharm. Choose Docker then Docker-compose. After
+choosing, give the path to docker-compose.yml and check both checkboxes under Options.
+   
 ![adding configuration](screenshots/add_configuration.png)
 
-After the configuration, we can run the project. If the project is running successfully, we can connect our MSQL
-database to our project. We go to View, then Tool Windows; finally, we choose Database. Here, we click on the + sign, on
-Data Source, then on MYSQL. We give our database a name: "homesData". The port needs to be set to 32000. We give "root"
-as user, and "root" as password. Finally, we can click on Test Connection, then Apply and OK.
+2. To view the mySQL Database in Pycharm, go to View / Tool Windows / Database. Click on the + sign, then
+Data Source, then on MYSQL. We give our database a name: "homesData". The port is set to 32000. We give "root"
+as user and password. Click on Test Connection to check the connection to the database. If everything works, click Apply and OK.
 
 ![connecting database](screenshots/database.png)
 
-After these steps, we need to add an interpreter. We choose Docker Compose, give the path to docker-compose.yml and
-select app as a service. Finally, we click on OK. Now, we are able to choose the newly added interpreter.
+3. Add an interpreter. We choose Docker Compose, give the path to docker-compose.yml and
+select app as a service. Finally, we click on OK. Choose the newly added interpreter.
 
 ![adding interpreter](screenshots/add_interpreter.png)
 
-We run the app again, then in order to see the website, we type "http://localhost:5000" into the address bar of our
+4. Run the app. In order to see the website, we type "http://localhost:5000" into the address bar of our
 internet browser.
 
