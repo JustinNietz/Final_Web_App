@@ -1,31 +1,38 @@
-# Project Description
+# IS 601 - Final Web Application
+
+## Project Description
 
 This website is designed for NJIT's course IS-601. We needed to research and develop one unique feature per team member
-and integrate it into our application (Pycharm, Docker, Flask, MySQL). Justin Nietzer worked on creating a login and registration process that includes
-email verification, and Nikolett Muller worked on using the statistics project to create API endpoints and then consume
-those endpoints using a JavaScript chart.
+and integrate it into our application (Pycharm, Docker, Flask, MySQL).
 
-# Installation Instructions for Using the App with Docker
+## Team Members and feature
 
-## 1. Installing Docker
+* Justin Nietzer worked on creating a login and registration process that includes email verification
 
-**A, Instructions for Windows Users**
+* Nikolett Muller worked on using the statistics project to create API endpoints and then consume those endpoints using
+  a JavaScript chart.
 
-There are needed requirements to install Docker Desktop:
+## Installation Instructions for Using the App with Docker
+
+### 1. Installing Docker
+
+#### For Windows Users
+
+**Requirements**
 
 * Windows 10, version 1903 or higher
-* WSL 2 feature is enabled
+* WSL 2 feature enabled
 * Prerequisites for running WSL 2 on Windows 10
 * 64 bit processor
 * 4GB system RAM
 * BIOS-level hardware virtualization support must be enabled in the BIOS settings
 * Linux kernel update package is installed
 
-If all requirements are met, we can download Docker Desktop Installer.exe from Docker Hub. After that, we need to just
-double-click on the file to run the installer. It is highly important that we ensure the Enable WSL 2 Features option is
-selected on the Configuration page. By following the instructions given by the installation wizard, we can proceed with
-the installation. Docker Desktop does not run automatically after we installed it. To start the program, we need to
-search for it on our computer.
+1. Download Docker Desktop Installer.exe from Docker
+2. Double-click on the file to run the installer. Ensure the Enable WSL 2 Features option is selected on the
+   Configuration page. 
+3. Docker Desktop does not run automatically after we installed it. To start the program, we need to
+   search for it on our computer.
 
 ![finding Docker](screenshots/Docker_in_Search.png)
 
