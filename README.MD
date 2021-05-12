@@ -78,7 +78,7 @@ select app as a service. Finally, we click on OK. Choose the newly added interpr
 
 ![adding interpreter](screenshots/add_interpreter.png)
 
-4. For the Sendgrid API, you must install the .env file attached to the submission.
+4. For the Sendgrid API, you must install the .env file attached to the submission. Make sure the file is downloaded as **.env**, not **env**.
 
 4. Run the app. In order to see the website, we type "http://localhost:5000" into the address bar of our
 internet browser.
